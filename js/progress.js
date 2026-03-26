@@ -83,22 +83,7 @@ const Progress = {
     'm02-quiz-final'
   ],
 
-  // Combined Module 1 (legacy — used for overall tracking)
-  MODULE_1_PAGES: [
-    'm1-five-layer-arch',
-    'm1-tool-definitions',
-    'm1-error-handling',
-    'm1-tool-calling',
-    'm1-sim-build-layers',
-    'm1-agent-anatomy',
-    'm1-role-taxonomy',
-    'm1-sim-guardrails',
-    'm1-langgraph-patterns',
-    'm1-react-loop',
-    'm1-quiz-final'
-  ],
-
-  // Module 03: Persona Design
+// Module 03: Persona Design
   MODULE_03_PAGES: [
     'm03-personas',
     'm03-guardrails-personas',
