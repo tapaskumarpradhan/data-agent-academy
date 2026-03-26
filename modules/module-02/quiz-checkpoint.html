@@ -164,15 +164,15 @@
               <div class="stat-box__label">LangGraph Patterns</div>
             </div>
             <div class="stat-box">
-              <div class="stat-box__value">3</div>
-              <div class="stat-box__label">ReAct Phases</div>
+              <div class="stat-box__value">15</div>
+              <div class="stat-box__label">Questions Ahead</div>
             </div>
           </div>
 
           <div class="callout reveal">
             <div class="callout__label">How It Works</div>
             <div class="callout__text">
-              Select one answer per question. Once all 8 are answered, click "Check Answers" to see your score with detailed explanations. You need 80% (7/8) for an excellent rating.
+              Select one answer per question. Once all 15 are answered, click "Check Answers" to see your score with detailed explanations. You need 80% (12/15) for an excellent rating.
             </div>
           </div>
         </section>
@@ -332,6 +332,84 @@
         ],
         correct: 1,
         explanation: 'ReAct excels when the agent cannot predict the full plan upfront. After each action, the agent observes the outcome and reasons about the next step &mdash; for example, discovering that a table has unexpected columns and adapting the SQL query accordingly.'
+      },
+      // --- From Module 01 (agent anatomy, role taxonomy, LangGraph, ReAct) ---
+      {
+        question: 'In the ReAct loop, what happens after the THINK step?',
+        options: [
+          'Observe',
+          'Return',
+          'Act',
+          'Validate'
+        ],
+        correct: 2,
+        explanation: 'The ReAct pattern follows: Think (reason about what to do) → Act (execute a tool call) → Observe (examine the result) → Repeat.'
+      },
+      {
+        question: 'Which agent role is best for "Run this specific SQL query and return results"?',
+        options: [
+          'Orchestrator',
+          'Super Agent',
+          'Utility Agent',
+          'All of the above'
+        ],
+        correct: 2,
+        explanation: 'Utility Agents are single-purpose specialists — they do one thing fast and reliably. Running a specific SQL query is a perfect utility agent task.'
+      },
+      {
+        question: 'What LangGraph pattern should you use when the agent might need to retry a failed query?',
+        options: [
+          'Sequential Chain',
+          'Conditional Branching',
+          'Loop with Feedback',
+          'Parallel Execution'
+        ],
+        correct: 2,
+        explanation: 'Loops with feedback enable self-correction — the agent can try a query, validate the result, fix errors, and retry until it succeeds or hits a limit.'
+      },
+      {
+        question: 'Which agent component stores conversation history and learned information?',
+        options: [
+          'LLM',
+          'Reasoning Graph',
+          'Memory',
+          'Context'
+        ],
+        correct: 2,
+        explanation: 'Memory stores both short-term (current conversation history) and long-term (persistent learned information) data that persists across interactions.'
+      },
+      {
+        question: 'Which collaboration pattern has multiple agents argue different positions before an evaluator decides?',
+        options: [
+          'Sequential Handoff',
+          'Parallel Execution',
+          'Supervisor Pattern',
+          'Debate Pattern'
+        ],
+        correct: 3,
+        explanation: 'The Debate pattern improves quality through adversarial reasoning — agents present opposing analyses and an evaluator synthesizes the best answer.'
+      },
+      {
+        question: 'AcmeCorp\'s agent needs to simultaneously fetch schema, row counts, and sample data. Which pattern?',
+        options: [
+          'Sequential Chain',
+          'Conditional Branching',
+          'Loop with Feedback',
+          'Parallel Execution'
+        ],
+        correct: 3,
+        explanation: 'When tasks are independent of each other (schema, row counts, and sample data don\'t depend on one another), parallel execution runs them concurrently for faster results.'
+      },
+      {
+        question: 'What distinguishes a Super Agent from a Utility Agent?',
+        options: [
+          'Super Agent is faster',
+          'Super Agent has cross-domain capabilities',
+          'Super Agent uses more memory',
+          'Super Agent costs less'
+        ],
+        correct: 1,
+        explanation: 'Super Agents handle diverse task types across multiple domains with broad reasoning capability. Utility Agents specialize in one narrow task with high reliability.'
       }
     ]);
 

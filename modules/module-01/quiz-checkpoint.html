@@ -153,7 +153,7 @@
           <div class="hero-line" style="max-width: 300px; margin-bottom: var(--space-6);"></div>
 
           <p class="reveal" style="font-size: var(--font-lg); max-width: 650px; line-height: 1.7;">
-            You've completed all 11 lessons and 2 simulations. Time to test your knowledge. 12 questions covering everything in Module 01.
+            You've completed all 11 lessons and 2 simulations. Time to test your knowledge. 13 questions covering everything in Module 01.
           </p>
 
           <!-- Stats -->
@@ -167,7 +167,7 @@
               <div class="stat-box__label">Simulations Completed</div>
             </div>
             <div class="stat-box">
-              <div class="stat-box__value">12</div>
+              <div class="stat-box__value">13</div>
               <div class="stat-box__label">Questions Ahead</div>
             </div>
           </div>
@@ -175,7 +175,7 @@
           <div class="callout reveal">
             <div class="callout__label">How It Works</div>
             <div class="callout__text">
-              Select one answer per question. Once all 12 are answered, click "Check Answers" to see your score with detailed explanations. You need 80% (10/12) for an excellent rating.
+              Select one answer per question. Once all 13 are answered, click "Check Answers" to see your score with detailed explanations. You need 80% (11/13) for an excellent rating.
             </div>
           </div>
         </section>
@@ -276,50 +276,6 @@
         explanation: 'Transient errors like "database busy" may succeed on retry. Exponential backoff prevents hammering the database while giving it time to recover.'
       },
       {
-        question: 'In the ReAct loop, what happens after the THINK step?',
-        options: [
-          'Observe',
-          'Return',
-          'Act',
-          'Validate'
-        ],
-        correct: 2,
-        explanation: 'The ReAct pattern follows: Think (reason about what to do) → Act (execute a tool call) → Observe (examine the result) → Repeat.'
-      },
-      {
-        question: 'Which agent role is best for "Run this specific SQL query and return results"?',
-        options: [
-          'Orchestrator',
-          'Super Agent',
-          'Utility Agent',
-          'All of the above'
-        ],
-        correct: 2,
-        explanation: 'Utility Agents are single-purpose specialists — they do one thing fast and reliably. Running a specific SQL query is a perfect utility agent task.'
-      },
-      {
-        question: 'What LangGraph pattern should you use when the agent might need to retry a failed query?',
-        options: [
-          'Sequential Chain',
-          'Conditional Branching',
-          'Loop with Feedback',
-          'Parallel Execution'
-        ],
-        correct: 2,
-        explanation: 'Loops with feedback enable self-correction — the agent can try a query, validate the result, fix errors, and retry until it succeeds or hits a limit.'
-      },
-      {
-        question: 'Which agent component stores conversation history and learned information?',
-        options: [
-          'LLM',
-          'Reasoning Graph',
-          'Memory',
-          'Context'
-        ],
-        correct: 2,
-        explanation: 'Memory stores both short-term (current conversation history) and long-term (persistent learned information) data that persists across interactions.'
-      },
-      {
         question: 'In the circuit breaker pattern, what happens after 5 failures in 60 seconds?',
         options: [
           'Retry faster',
@@ -341,38 +297,97 @@
         correct: 1,
         explanation: 'The Evaluation layer (Layer 5) measures query accuracy, tracks cost per interaction, monitors latency, and enables data-driven continuous improvement.'
       },
+      // --- Tool Calling (Lesson 04) ---
       {
-        question: 'Which collaboration pattern has multiple agents argue different positions before an evaluator decides?',
+        question: 'What does the LLM actually emit during a tool call?',
         options: [
-          'Sequential Handoff',
-          'Parallel Execution',
-          'Supervisor Pattern',
-          'Debate Pattern'
-        ],
-        correct: 3,
-        explanation: 'The Debate pattern improves quality through adversarial reasoning — agents present opposing analyses and an evaluator synthesizes the best answer.'
-      },
-      {
-        question: 'AcmeCorp\'s agent needs to simultaneously fetch schema, row counts, and sample data. Which pattern?',
-        options: [
-          'Sequential Chain',
-          'Conditional Branching',
-          'Loop with Feedback',
-          'Parallel Execution'
-        ],
-        correct: 3,
-        explanation: 'When tasks are independent of each other (schema, row counts, and sample data don\'t depend on one another), parallel execution runs them concurrently for faster results.'
-      },
-      {
-        question: 'What distinguishes a Super Agent from a Utility Agent?',
-        options: [
-          'Super Agent is faster',
-          'Super Agent has cross-domain capabilities',
-          'Super Agent uses more memory',
-          'Super Agent costs less'
+          'Executable code',
+          'A structured JSON request',
+          'A natural language command',
+          'A direct database query'
         ],
         correct: 1,
-        explanation: 'Super Agents handle diverse task types across multiple domains with broad reasoning capability. Utility Agents specialize in one narrow task with high reliability.'
+        explanation: 'The LLM emits a structured JSON declaration of intent — tool name and parameters. The agent runtime executes it, not the LLM itself.'
+      },
+      {
+        question: 'In a typical AcmeCorp agent response, how many tool-calling iterations are involved?',
+        options: [
+          'Always exactly one',
+          'Zero — the LLM answers directly from training data',
+          'Multiple iterations, each building on previous results',
+          'Depends on the user\'s subscription tier'
+        ],
+        correct: 2,
+        explanation: 'Real-world agent responses involve multiple tool-calling iterations — schema discovery, query building, validation, and result formatting each require separate tool calls that build on each other.'
+      },
+      // --- Framework Landscape (Lesson 05) ---
+      {
+        question: 'Which framework is best suited for complex stateful workflows with retry loops and human-in-the-loop checkpoints?',
+        options: [
+          'CrewAI',
+          'AutoGen',
+          'LangGraph',
+          'OpenAI Agents SDK'
+        ],
+        correct: 2,
+        explanation: 'LangGraph uses graph-first state machines with explicit versioned state and the strongest production tooling (LangSmith). It excels at complex stateful workflows with conditional branching, retry loops, and human-in-the-loop checkpoints.'
+      },
+      {
+        question: 'What is the main trade-off of using AutoGen for multi-agent coordination?',
+        options: [
+          'No support for Azure or cloud environments',
+          'Conversation-based coordination can be unpredictable and uses higher tokens',
+          'Cannot run agents in parallel',
+          'Requires LangGraph as an underlying dependency'
+        ],
+        correct: 1,
+        explanation: 'AutoGen\'s conversational multi-agent model is powerful for collaborative reasoning but can be unpredictable — agents may loop or over-debate — and the message-passing approach typically uses more tokens than graph-based frameworks.'
+      },
+      // --- Alternative Reasoning (Lesson 06) ---
+      {
+        question: 'Which reasoning pattern generates multiple candidate approaches simultaneously and prunes the least promising ones?',
+        options: [
+          'ReAct',
+          'Plan-and-Execute',
+          'Tree-of-Thought',
+          'Reflexion'
+        ],
+        correct: 2,
+        explanation: 'Tree-of-Thought generates a branching tree of reasoning paths, evaluates each with a critic, pursues the most promising branch, and prunes dead ends. Best for complex analytical problems with multiple valid approaches — but costs 3–5x more tokens than ReAct.'
+      },
+      {
+        question: 'A data agent fails its first attempt at root cause analysis, explicitly critiques its own output, then retries with those insights. Which pattern is this?',
+        options: [
+          'ReAct',
+          'Plan-and-Execute',
+          'Tree-of-Thought',
+          'Reflexion'
+        ],
+        correct: 3,
+        explanation: 'Reflexion follows an Execute → Reflect → Learn → Retry cycle. The agent\'s self-critique produces explicit learning insights that inform the next attempt — ideal for debugging and iterative investigation.'
+      },
+      // --- Advanced Tool Use (Lesson 07) ---
+      {
+        question: 'AcmeCorp reduced SQL formatting errors from 25% to under 3% using which technique?',
+        options: [
+          'Tool Search',
+          'Programmatic tool calling',
+          'Few-shot examples in tool definitions',
+          'MCP lazy loading'
+        ],
+        correct: 2,
+        explanation: 'Adding 2–3 few-shot examples (200–400 tokens) to tool definitions dropped SQL formatting errors from 25% to under 3%. Examples show the agent exactly what correct input/output looks like, eliminating ambiguity far more effectively than description text alone.'
+      },
+      {
+        question: 'What is the primary benefit of programmatic tool calling over one-at-a-time LLM-decided calls?',
+        options: [
+          'Better accuracy on each individual call',
+          'The agent writes a code block handling many calls at once — drastically reducing time and token cost',
+          'Simpler error handling with no retries needed',
+          'Works without requiring any framework'
+        ],
+        correct: 1,
+        explanation: 'Programmatic tool calling lets the agent write a single code block with loops and conditionals instead of 200 separate LLM reasoning cycles. AcmeCorp\'s 200-store data quality check dropped from 10 minutes to 15 seconds and from 400K to 2K tokens.'
       }
     ];
 
